@@ -46,7 +46,7 @@ def predict_emotion(txt,model, model2):
     sample_transformed = model2.transform(txt).toarray()
     prediction = model.predict(sample_transformed)
     prediction_probability = model.predict_proba(sample_transformed)
-    print(f"Prediction: {prediction[0]}, Prediction Score: {np.max(prediction_probability)}")
+    print(f"Prediction: {prediction}, Prediction Score: {np.max(prediction_probability)}")
     
     # gets a dictionary of {'class_name': probability}
     prob_per_class_dictionary = dict(zip(model.classes_, prediction_probability[0]))
@@ -54,6 +54,6 @@ def predict_emotion(txt,model, model2):
 
 loaded_model = pickle.load(open('flask/Model1_NLP.sav', 'rb'))
 loaded_tfidf = pickle.load(open('flask/tfidf.pickle', 'rb'))
-sample_text = sample_txt = ['This is fun ']
+sample_text = sample_txt = ['I feel so sad.']
 
 predict_emotion(sample_text, loaded_model, loaded_tfidf)

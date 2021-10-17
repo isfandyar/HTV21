@@ -1,10 +1,16 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from detector2 import predict_emotion
+
 import pickle
+
+import detector2
+from detector2 import predict_emotion
+
+
 
 app = Flask(__name__)
 CORS(app)
+
 
 @app.route("/detect", methods=["GET", "POST"])
 def predict():
@@ -20,6 +26,8 @@ def predict():
     }
 
     return jsonify(response)
+
+
 
 
 if __name__ == "__main__":
