@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import ShowEmotion from './ShowEmotion';
 
 
 
@@ -47,7 +48,8 @@ function ShowTranscript(props) {
                 className='btn btn-primary btn-block mb-3'
                 onClick={onSubmit}
             />
-            <p className="p-3 mb-2 bg-light text-dark text-start">{text}</p>
+            <p className="p-3 mb-3 bg-light text-dark text-start">{text}</p>
+            <ShowEmotion text={text}/>
         </div>
     );
 }
