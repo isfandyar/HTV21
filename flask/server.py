@@ -1,15 +1,15 @@
 from flask import Flask, request
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
+
 
 app = Flask(__name__)
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app)
 
-@app.route('/detect', methods=['GET', 'POST'])
-def parse_request():
-    data = request.json  # data is empty
-    print(data)
-    return data
+@app.route("/detect", methods=["GET", "POST"])
+def predict():
+    data = request.json  # data is the text
+
+    return "Hello, cross-origin-world!"
 
 
 if __name__ == "__main__":

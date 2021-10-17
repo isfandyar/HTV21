@@ -9,22 +9,27 @@ function ShowEmotion(props) {
     const onSubmit = async e => {
         e.preventDefault();
 
-        const assembly = axios.create({
-            baseURL: "https://localhost:5000",
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ title: 'React POST Request Example' })
+        // };
+        // const response = await fetch('https://localhost:5000', requestOptions);
+        // const data = await response.json();
+        // alert(data)
+
+        // fetch('http://localhost:5000/detect').then(res => {
+        //     res.json()
+        //     alert(res)
+        // }).catch(err => console.log(err))
+        const flask = await axios.post('http://localhost:5000/detect', props.text, {
             headers: {
-                "content-type": "application/json",
-            },
+                // Overwrite Axios's automatically set Content-Type
+                'Content-Type': 'application/json'
+            }
         });
 
-        try {
-            console.log('the text: ' + props.text);
-            await assembly.post(`/detect`, {"hello":"test"}).then((res) => {
-                console.log(res.data)
-            })
-        } catch (error) {
-            console.log(error.response);
-
-        }
+        console.log(flask.data);
     }
 
     return (

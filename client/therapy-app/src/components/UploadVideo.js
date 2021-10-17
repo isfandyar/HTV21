@@ -70,8 +70,8 @@ function UploadVideo(url) {
     return (
         <Fragment>
             <form onSubmit={onSubmit} className="text-center">
-                <div class="mb-2">
-                    <label for="formFileSm" class="form-label">Please Upload The Video File</label>
+                <div className="mb-2">
+                    <label htmlFor="formFileSm" className="form-label">Please Upload The Video File</label>
                     <input className="form-control form-control-sm" id="formFileSm" type="file" onChange={onChange}/>
                 </div>
 

@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="container">
       <h4 className='display-4 text-center mb-4'>
-        Emotify
+        Emotional.AI
       </h4>
 
       <UploadVideo />
