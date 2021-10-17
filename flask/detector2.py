@@ -40,8 +40,6 @@ def my_tokenizer(sentence):
     return listofstemmed_words
 
 
-loaded_model = pickle.load(open('Model1_NLP.sav', 'rb'))
-loaded_tfidf = pickle.load(open('tfidf.pickle', 'rb'))
 
 def predict_emotion(txt,model, model2):
     
@@ -53,3 +51,9 @@ def predict_emotion(txt,model, model2):
     # gets a dictionary of {'class_name': probability}
     prob_per_class_dictionary = dict(zip(model.classes_, prediction_probability[0]))
     return prob_per_class_dictionary
+
+loaded_model = pickle.load(open('flask/Model1_NLP.sav', 'rb'))
+loaded_tfidf = pickle.load(open('flask/tfidf.pickle', 'rb'))
+sample_text = sample_txt = ['This is fun ']
+
+predict_emotion(sample_text, loaded_model, loaded_tfidf)

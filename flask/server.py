@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from detector2 import predict_emotion, my_tokenizer
+from detector2 import predict_emotion
 import pickle
 
 app = Flask(__name__)
