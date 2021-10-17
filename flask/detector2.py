@@ -16,33 +16,34 @@ from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
 
-def predict_emotion(txt, model, model2):
+stemmer = nltk.stem.PorterStemmer()
+# getting stemmer
+
+ENGLISH_STOP_WORDS = stopwords.words('english')
+
+def my_tokenizer(sentence):
     
+
+    sentence = nltk.word_tokenize(sentence) 
+
+    listofwords=[word.lower() for word in sentence if word.isalpha()]
     
-    stemmer = nltk.stem.PorterStemmer()
-    # getting stemmer
+    listofstemmed_words = []
+    
+    # remove stopwords and any tokens that are just empty strings
+    for word in listofwords:
+        if (not word in ENGLISH_STOP_WORDS) and (word!=''):
+            # Stem words
+            stemmed_word = stemmer.stem(word)
+            listofstemmed_words.append(stemmed_word)
 
-    ENGLISH_STOP_WORDS = stopwords.words('english')
-
-
-    def my_tokenizer(sentence):
-
-        sentence = nltk.word_tokenize(sentence) 
-
-        listofwords=[word.lower() for word in sentence if word.isalpha()]
-
-        listofstemmed_words = []
-
-        # remove stopwords and any tokens that are just empty strings
-        for word in listofwords:
-            if (not word in ENGLISH_STOP_WORDS) and (word!=''):
-                # Stem words
-                stemmed_word = stemmer.stem(word)
-                listofstemmed_words.append(stemmed_word)
-
-        return listofstemmed_words
+    return listofstemmed_words
 
 
+loaded_model = pickle.load(open('Model1_NLP.sav', 'rb'))
+loaded_tfidf = pickle.load(open('tfidf.pickle', 'rb'))
+
+def predict_emotion(txt,model, model2):
     
     sample_transformed = model2.transform(txt).toarray()
     prediction = model.predict(sample_transformed)

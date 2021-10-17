@@ -1,6 +1,7 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-
+from detector2 import predict_emotion, my_tokenizer
+import pickle
 
 app = Flask(__name__)
 CORS(app)
@@ -9,8 +10,17 @@ CORS(app)
 def predict():
     data = request.json  # data is the text
 
-    return "Hello, cross-origin-world!"
+    loaded_model = pickle.load(open('flask/Model1_NLP.sav', 'rb'))
+    loaded_tfidf = pickle.load(open('flask/tfidf.pickle', 'rb'))
+
+    predictions = predict_emotion(data, loaded_model, loaded_tfidf)
+
+    response = {
+        'predictions': list(predictions)
+    }
+
+    return jsonify(response)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port = "3000")

@@ -22,7 +22,7 @@ function ShowEmotion(props) {
         //     res.json()
         //     alert(res)
         // }).catch(err => console.log(err))
-        const flask = await axios.post('http://localhost:5000/detect', props.text, {
+        const flask = await axios.post('http://localhost:3000/detect', props.text, {
             headers: {
                 // Overwrite Axios's automatically set Content-Type
                 'Content-Type': 'application/json'
@@ -30,6 +30,7 @@ function ShowEmotion(props) {
         });
 
         console.log(flask.data);
+        setText(flask.data)
     }
 
     return (
